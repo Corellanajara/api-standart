@@ -11,6 +11,11 @@ exports.routesConfig = function (app) {
     app.post('/users', [
         UsersController.insert
     ]);
+    app.post('/users/login',[
+        //	ValidationMiddleware.validJWTNeeded,
+        //        PermissionMiddleware.minimumPermissionLevelRequired(FREE),
+        UsersController.getByEmail
+    ]);
     app.get('/users', [
         ValidationMiddleware.validJWTNeeded,
         PermissionMiddleware.minimumPermissionLevelRequired(ADMIN),

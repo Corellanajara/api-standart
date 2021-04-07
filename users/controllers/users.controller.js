@@ -70,3 +70,11 @@ exports.removeById = (req, res) => {
             res.status(204).send({});
         });
 };
+
+exports.getByEmail = (req,res) =>{
+    console.log(req.body.email);
+     UserModel.findByEmail(req.body.email)
+     .then(result => {
+       res.status(200).send(result);
+     })
+}
