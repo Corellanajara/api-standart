@@ -8,7 +8,7 @@ email : String,
 phone : String,
 status : Boolean,
 enterpriseId : String,
-UserId : String,
+userId : String,
 
 }, { timestamps: true }
 );
@@ -36,9 +36,9 @@ exports.createContact = (ContactData) => {
 const contact = new Contact(ContactData);
 return contact.save();
 };
-exports.list = (perPage, page) => {
+exports.list = (perPage, page, enterprise) => {
 return new Promise((resolve, reject) => {
-Contact.find()
+Contact.find({enterpriseId: enterprise})
 .limit(perPage)
 .skip(perPage * page)
 .exec(function (err, contact) {
@@ -50,6 +50,7 @@ resolve(contact);
 })
 });
 };
+
 exports.patchContact = (id, ContactData) => {
 return new Promise((resolve, reject) => {
 Contact.findById(id, function (err, contact) {
